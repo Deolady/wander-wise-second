@@ -30,3 +30,29 @@ export const remove = async (id, userId) => {
     if (!trip) throw new NotFoundError('Trip not found');
     return trip;
 }
+
+export const invite = async (id, userId, collaboratorEmails) => {
+  const trip = await getOne(id, userId);
+
+  if (
+    trip.collaborators?.some((collaborator) =>
+      collaboratorEmails.includes(collaborator.email)
+    )
+  ) {
+    throw new ConflictError("Collaborator already invited");
+  }
+
+  const token = await generateAccessToken({ tripId: id }, '1h');
+
+  const invitationLink = `${process.env.BASE_URL}/trips/${id}/invite/accept?token=${token}`;
+
+  await sendMail(collaboratorEmails.join(","), "Invitation to join a trip", {
+    link: invitationLink,
+    title: trip.title,
+    startDate: trip.startDate.toDateString(),
+    endDate: trip.endDate.toDateString(),
+    name: trip.user.name,
+  });
+
+  return { message: "Collaborators invited successfully" };
+}
