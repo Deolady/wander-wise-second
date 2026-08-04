@@ -1,7 +1,8 @@
-@baseUrl = http://localhost:3000
+@baseUrl = https://6a83-2400-1a00-1b67-2848-44b1-3293-826e-bd5c.ngrok-free.app
 @userId = 6a44fcb0dc3e1cf8f09a351a
-@tripId = 6a60aea2a22c59f2079c8437
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU0Y2MxNmJkOTY2ZDYwY2VhMDcwYTEiLCJpYXQiOjE3ODUwNjY2NDgsImV4cCI6MTc4NTE1MzA0OH0.7ZTnW8rjWOX5y0F71Miea2eE8LF_GcryelA_-6ye7yc
+@tripId = 6a707b71556396d148e52c17
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU0Y2MxNmJkOTY2ZDYwY2VhMDcwYTEiLCJpYXQiOjE3ODU4NDM2MDksImV4cCI6MTc4NTkzMDAwOX0.IFNqfrn6oywBT9sdybZ-xf-vTIs11L5rWpagpv8jVG0
+@tripToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmlwSWQiOiI2YTcwN2I3MTU1NjM5NmQxNDhlNTJjMTciLCJpYXQiOjE3ODU4NDM2NzksImV4cCI6MTc4NTg0NzI3OX0.DCyqL_1qJVYQyPgPGMwN55egJm6ep_eEtR1YEqt__8s
 
 ### TEST API
 GET {{baseUrl}}
@@ -99,3 +100,21 @@ Authorization: Bearer {{token}}
 {
   "name": "Jacket"
 }
+
+### SEND TRIP INVITATION
+POST {{baseUrl}}/trips/{{tripId}}/invite
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "collaboratorEmails": [
+    "ankitchy158@gmail.com",
+    "sipendrachaudhary1@gmail.com",
+    "snehamajhi09@gmail.com",
+    "shashankj677@gmail.com"
+  ]
+}
+
+### ACCEPT TRIP INVITATION
+GET {{baseUrl}}/trips/{{tripId}}/invite/accept?token={{tripToken}}
+Authorization: Bearer {{token}}
