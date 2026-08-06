@@ -108,10 +108,7 @@ Authorization: Bearer {{token}}
 
 {
   "collaboratorEmails": [
-    "ankitchy158@gmail.com",
-    "sipendrachaudhary1@gmail.com",
-    "snehamajhi09@gmail.com",
-    "shashankj677@gmail.com"
+    "jane@example.com"
   ]
 }
 
